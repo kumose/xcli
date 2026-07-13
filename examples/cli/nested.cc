@@ -5,7 +5,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #define XCLI_ENABLE_EXTRA_VALIDATORS 1
-#include <xcli/cli/cli.h>
+#include <xcli/cli.h>
 #include <string>
 
 int main(int argc, char **argv) {

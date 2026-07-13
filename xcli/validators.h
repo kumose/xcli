@@ -8,10 +8,10 @@
 
 // IWYU pragma: private, include "CLI/CLI.hpp"
 
-#include <xcli/cli/error.h>
-#include <xcli/cli/macros.h>
-#include <xcli/cli/string_tools.h>
-#include <xcli/cli/type_tools.h>
+#include <xcli/error.h>
+#include <xcli/macros.h>
+#include <xcli/string_tools.h>
+#include <xcli/type_tools.h>
 
 // [CLI11:public_includes:set]
 #include <cmath>
@@ -342,5 +342,5 @@ XCLI_INLINE std::pair<std::string, std::string> split_program_name(std::string c
 }  // namespace xcli
 
 #ifndef XCLI_COMPILE
-#include <xcli/cli/impl/validators_inl.h>  // IWYU pragma: export
+#include <xcli/impl/validators_inl.h>  // IWYU pragma: export
 #endif

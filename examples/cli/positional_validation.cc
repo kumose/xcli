@@ -6,7 +6,7 @@
 
 #define XCLI_ENABLE_EXTRA_VALIDATORS 1
 
-#include <xcli/cli/cli.h>
+#include <xcli/cli.h>
 #include <iostream>
 #include <string>
 

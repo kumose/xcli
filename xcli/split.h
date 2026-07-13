@@ -15,7 +15,7 @@
 #include <vector>
 // [CLI11:public_includes:end]
 
-#include <xcli/cli/macros.h>
+#include <xcli/macros.h>
 
 namespace xcli {
 // [CLI11:split_hpp:verbatim]
@@ -46,5 +46,5 @@ get_names(const std::vector<std::string> &input, bool allow_non_standard = false
 }  // namespace xcli
 
 #ifndef XCLI_COMPILE
-#include <xcli/cli/impl/split_inl.h>  // IWYU pragma: export
+#include <xcli/impl/split_inl.h>  // IWYU pragma: export
 #endif

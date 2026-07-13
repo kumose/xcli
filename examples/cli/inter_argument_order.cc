@@ -4,7 +4,7 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <xcli/cli/cli.h>
+#include <xcli/cli.h>
 #include <algorithm>
 #include <iostream>
 #include <string>

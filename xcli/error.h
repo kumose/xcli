@@ -17,8 +17,8 @@
 // [CLI11:public_includes:end]
 
 // CLI library includes
-#include <xcli/cli/macros.h>
-#include <xcli/cli/string_tools.h>
+#include <xcli/macros.h>
+#include <xcli/string_tools.h>
 
 namespace xcli {
 // [CLI11:error_hpp:verbatim]

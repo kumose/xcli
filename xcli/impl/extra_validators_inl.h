@@ -7,15 +7,15 @@
 #pragma once
 
 // IWYU pragma: private, include "CLI/CLI.hpp"
-#include <xcli/cli/extra_validators.h>
+#include <xcli/extra_validators.h>
 
 #if (defined(XCLI_ENABLE_EXTRA_VALIDATORS) && XCLI_ENABLE_EXTRA_VALIDATORS == 1) ||                                  \
     (!defined(XCLI_DISABLE_EXTRA_VALIDATORS) || XCLI_DISABLE_EXTRA_VALIDATORS == 0)
 
-#include <xcli/cli/encoding.h>
-#include <xcli/cli/macros.h>
-#include <xcli/cli/string_tools.h>
-#include <xcli/cli/type_tools.h>
+#include <xcli/encoding.h>
+#include <xcli/macros.h>
+#include <xcli/string_tools.h>
+#include <xcli/type_tools.h>
 
 // [CLI11:public_includes:set]
 #include <algorithm>

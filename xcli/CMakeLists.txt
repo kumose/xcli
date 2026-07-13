@@ -16,8 +16,8 @@
 # below are examples, after initialization, modify it to your own.
 ###########################################################################
 file(GLOB CLI_HEADERS
-    cli/*.h
-    cli/impl/*.h
+    *.h
+    impl/*.h
 )
 
 kmcmake_cc_interface(

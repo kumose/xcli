@@ -6,7 +6,7 @@
 
 // from Issue #566 on github https://github.com/CLIUtils/CLI11/issues/566
 
-#include <xcli/cli/cli.h>
+#include <xcli/cli.h>
 #include <iostream>
 #include <sstream>
 #include <string>

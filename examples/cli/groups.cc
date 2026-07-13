@@ -4,8 +4,8 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <xcli/cli/cli.h>
-#include <xcli/cli/timer.h>
+#include <xcli/cli.h>
+#include <xcli/timer.h>
 #include <iostream>
 #include <string>
 

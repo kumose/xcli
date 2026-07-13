@@ -18,9 +18,9 @@
 #include <vector>
 // [CLI11:public_includes:end]
 
-#include <xcli/cli/app.h>
-#include <xcli/cli/config_fwd.h>
-#include <xcli/cli/string_tools.h>
+#include <xcli/app.h>
+#include <xcli/config_fwd.h>
+#include <xcli/string_tools.h>
 
 namespace xcli {
 // [CLI11:config_hpp:verbatim]
@@ -51,5 +51,5 @@ void checkParentSegments(std::vector<ConfigItem> &output, const std::string &cur
 }  // namespace xcli
 
 #ifndef XCLI_COMPILE
-#include <xcli/cli/impl/config_inl.h>  // IWYU pragma: export
+#include <xcli/impl/config_inl.h>  // IWYU pragma: export
 #endif

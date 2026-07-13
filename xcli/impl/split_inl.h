@@ -9,7 +9,7 @@
 // IWYU pragma: private, include "CLI/CLI.hpp"
 
 // This include is only needed for IDEs to discover symbols
-#include <xcli/cli/split.h>
+#include <xcli/split.h>
 
 // [CLI11:public_includes:set]
 #include <string>
@@ -18,8 +18,8 @@
 #include <vector>
 // [CLI11:public_includes:end]
 
-#include <xcli/cli/error.h>
-#include <xcli/cli/string_tools.h>
+#include <xcli/error.h>
+#include <xcli/string_tools.h>
 
 namespace xcli {
 // [CLI11:split_inl_hpp:verbatim]

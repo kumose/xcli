@@ -19,7 +19,7 @@
 #include <vector>
 // [CLI11:public_includes:end]
 
-#include <xcli/cli/macros.h>
+#include <xcli/macros.h>
 
 namespace xcli {
 
@@ -284,5 +284,5 @@ XCLI_INLINE std::ostream &streamOutAsParagraph(std::ostream &out,
 }  // namespace xcli
 
 #ifndef XCLI_COMPILE
-#include <xcli/cli/impl/string_tools_inl.h>  // IWYU pragma: export
+#include <xcli/impl/string_tools_inl.h>  // IWYU pragma: export
 #endif

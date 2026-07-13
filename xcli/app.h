@@ -24,14 +24,14 @@
 // [CLI11:public_includes:end]
 
 // CLI Library includes
-#include <xcli/cli/config_fwd.h>
-#include <xcli/cli/error.h>
-#include <xcli/cli/formatter_fwd.h>
-#include <xcli/cli/macros.h>
-#include <xcli/cli/option.h>
-#include <xcli/cli/split.h>
-#include <xcli/cli/string_tools.h>
-#include <xcli/cli/type_tools.h>
+#include <xcli/config_fwd.h>
+#include <xcli/error.h>
+#include <xcli/formatter_fwd.h>
+#include <xcli/macros.h>
+#include <xcli/option.h>
+#include <xcli/split.h>
+#include <xcli/string_tools.h>
+#include <xcli/type_tools.h>
 
 namespace xcli {
 // [CLI11:app_hpp:verbatim]
@@ -1566,5 +1566,5 @@ struct AppFriend {
 }  // namespace xcli
 
 #ifndef XCLI_COMPILE
-#include <xcli/cli/impl/app_inl.h>  // IWYU pragma: export
+#include <xcli/impl/app_inl.h>  // IWYU pragma: export
 #endif

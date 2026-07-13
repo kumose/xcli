@@ -16,7 +16,7 @@
 #include <vector>
 // [CLI11:public_includes:end]
 
-#include <xcli/cli/string_tools.h>
+#include <xcli/string_tools.h>
 
 namespace xcli {
 // [CLI11:formatter_fwd_hpp:verbatim]

@@ -7,12 +7,12 @@
 #pragma once
 
 // IWYU pragma: private, include "CLI/CLI.hpp"
-#include <xcli/cli/validators.h>
+#include <xcli/validators.h>
 
-#include <xcli/cli/encoding.h>
-#include <xcli/cli/macros.h>
-#include <xcli/cli/string_tools.h>
-#include <xcli/cli/type_tools.h>
+#include <xcli/encoding.h>
+#include <xcli/macros.h>
+#include <xcli/string_tools.h>
+#include <xcli/type_tools.h>
 
 // [CLI11:public_includes:set]
 #include <map>

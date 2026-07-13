@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <xcli/cli/cli.h>
+#include <xcli/cli.h>
 
 #include "catch.hpp"
 #include <array>

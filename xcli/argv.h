@@ -13,7 +13,7 @@
 #include <vector>
 // [CLI11:public_includes:end]
 
-#include <xcli/cli/macros.h>
+#include <xcli/macros.h>
 
 namespace xcli {
 // [CLI11:argv_hpp:verbatim]
@@ -27,5 +27,5 @@ XCLI_INLINE std::vector<std::string> compute_win32_argv();
 }  // namespace xcli
 
 #ifndef XCLI_COMPILE
-#include <xcli/cli/impl/argv_inl.h>  // IWYU pragma: export
+#include <xcli/impl/argv_inl.h>  // IWYU pragma: export
 #endif

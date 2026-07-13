@@ -14,8 +14,8 @@
 #include <vector>
 // [CLI11:public_includes:end]
 
-#include <xcli/cli/app.h>
-#include <xcli/cli/formatter_fwd.h>
+#include <xcli/app.h>
+#include <xcli/formatter_fwd.h>
 
 namespace xcli {
 // [CLI11:formatter_hpp:verbatim]
@@ -23,5 +23,5 @@ namespace xcli {
 }  // namespace xcli
 
 #ifndef XCLI_COMPILE
-#include <xcli/cli/impl/formatter_inl.h>  // IWYU pragma: export
+#include <xcli/impl/formatter_inl.h>  // IWYU pragma: export
 #endif

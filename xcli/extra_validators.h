@@ -9,10 +9,10 @@
     (!defined(XCLI_DISABLE_EXTRA_VALIDATORS) || XCLI_DISABLE_EXTRA_VALIDATORS == 0)
 // IWYU pragma: private, include "CLI/CLI.hpp"
 
-#include <xcli/cli/error.h>
-#include <xcli/cli/macros.h>
-#include <xcli/cli/string_tools.h>
-#include <xcli/cli/validators.h>
+#include <xcli/error.h>
+#include <xcli/macros.h>
+#include <xcli/string_tools.h>
+#include <xcli/validators.h>
 
 // [CLI11:public_includes:set]
 #include <cmath>
@@ -635,7 +635,7 @@ const FileSizeValidator NonEmptyFile(1, 0);
 }  // namespace xcli
 
 #ifndef XCLI_COMPILE
-#include <xcli/cli/impl/extra_validators_inl.h>  // IWYU pragma: export
+#include <xcli/impl/extra_validators_inl.h>  // IWYU pragma: export
 #endif
 
 #endif

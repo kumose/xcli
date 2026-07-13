@@ -9,7 +9,7 @@
 // IWYU pragma: private, include "CLI/CLI.hpp"
 
 // This include is only needed for IDEs to discover symbols
-#include <xcli/cli/string_tools.h>
+#include <xcli/string_tools.h>
 
 // [CLI11:public_includes:set]
 #include <cstdint>

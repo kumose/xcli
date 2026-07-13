@@ -6,7 +6,7 @@
 
 // Code modified from Loic Gouarin(https://github.com/gouarin) https://github.com/CLIUtils/CLI11/issues/1135
 
-#include <xcli/cli/cli.h>
+#include <xcli/cli.h>
 #include <array>
 #include <iostream>
 

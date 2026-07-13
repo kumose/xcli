@@ -13,7 +13,7 @@
 #include <utility>
 #include <vector>
 
-#include <xcli/cli/cli.h>
+#include <xcli/cli.h>
 
 // only works with C++14 or higher
 

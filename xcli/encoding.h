@@ -7,7 +7,7 @@
 #pragma once
 
 // IWYU pragma: private, include "CLI/CLI.hpp"
-#include <xcli/cli/macros.h>
+#include <xcli/macros.h>
 
 // [CLI11:public_includes:set]
 #include <string>
@@ -50,5 +50,5 @@ XCLI_INLINE std::filesystem::path to_path(std::string_view str);
 }  // namespace xcli
 
 #ifndef XCLI_COMPILE
-#include <xcli/cli/impl/encoding_inl.h>  // IWYU pragma: export
+#include <xcli/impl/encoding_inl.h>  // IWYU pragma: export
 #endif

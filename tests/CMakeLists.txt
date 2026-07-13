@@ -9,6 +9,7 @@ set(CLI_TESTS
     formatter_test new_parse_test config_file_test optional_test
     string_parse_test complex_type_test true_false_test locale_test
     option_group_test extra_validators_test encoding_test
+    flags_test
 )
 
 foreach(T ${CLI_TESTS})
@@ -30,3 +31,14 @@ foreach(T ${CLI_TESTS})
         add_dependencies(cli_${T} ensure_utf8 ensure_utf8_twice)
     endif()
 endforeach()
+
+kmcmake_cc_test(
+    NAME flags_declare_test
+    MODULE cli
+    SOURCES
+        cli/flags_declare_test.cc
+        cli/flags_declare_flags.cc
+        cli/main.cc
+    DEPS ${PROJECT_NAME}::cli
+    CXXOPTS ${KMCMAKE_CXX_OPTIONS}
+)

@@ -18,9 +18,9 @@
 #include <utility>
 #include <vector>
 // [CLI11:public_includes:end]
-#include <xcli/cli/encoding.h>
-#include <xcli/cli/error.h>
-#include <xcli/cli/string_tools.h>
+#include <xcli/encoding.h>
+#include <xcli/error.h>
+#include <xcli/string_tools.h>
 
 namespace xcli {
 // [CLI11:config_fwd_hpp:verbatim]

@@ -19,11 +19,11 @@
 #include <vector>
 // [CLI11:public_includes:end]
 
-#include <xcli/cli/error.h>
-#include <xcli/cli/macros.h>
-#include <xcli/cli/split.h>
-#include <xcli/cli/string_tools.h>
-#include <xcli/cli/validators.h>
+#include <xcli/error.h>
+#include <xcli/macros.h>
+#include <xcli/split.h>
+#include <xcli/string_tools.h>
+#include <xcli/validators.h>
 
 namespace xcli {
 // [CLI11:option_hpp:verbatim]
@@ -873,5 +873,5 @@ class Option : public OptionBase<Option> {
 }  // namespace xcli
 
 #ifndef XCLI_COMPILE
-#include <xcli/cli/impl/option_inl.h>  // IWYU pragma: export
+#include <xcli/impl/option_inl.h>  // IWYU pragma: export
 #endif
