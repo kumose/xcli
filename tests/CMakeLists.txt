@@ -1,3 +1,5 @@
+configure_file(config.h.in ${CMAKE_CURRENT_SOURCE_DIR}/config.h @ONLY)
+
 add_executable(ensure_utf8 cli/ensure_utf8.cpp)
 add_executable(ensure_utf8_twice cli/ensure_utf8_twice.cpp)
 target_link_libraries(ensure_utf8 PRIVATE ${PROJECT_NAME}::cli)
