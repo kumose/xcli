@@ -76,21 +76,21 @@ class FlagValue {
   public:
     template <typename T>
     FlagValue(T *storage, bool owns)
-        : storage_(storage), type_(FlagTypeFor<T>()), owns_(owns) {}
+        : storage_(storage), type_(flag_type_for<T>()), owns_(owns) {}
 
     ~FlagValue();
 
     FlagType type() const { return type_; }
 
-    bool ParseFrom(const std::string &value);
-    std::string ToString() const;
-    bool Equal(const FlagValue &other) const;
+    bool parse_from(const std::string &value);
+    std::string flags_to_string() const;
+    bool equal(const FlagValue &other) const;
 
     void *storage() const { return storage_; }
 
   private:
     template <typename T>
-    static FlagType FlagTypeFor();
+    static FlagType flag_type_for();
 };
 
 // ============================================================
@@ -115,8 +115,8 @@ class CommandFlag {
     std::string default_value() const;
     FlagType type() const;
 
-    bool SetValue(const std::string &value);
-    std::string TypeName() const;
+    bool set_value(const std::string &value);
+    std::string flags_type_name() const;
 };
 
 // ============================================================
@@ -132,16 +132,16 @@ class FlagRegistry {
     FlagRegistry(const FlagRegistry &) = delete;
     FlagRegistry &operator=(const FlagRegistry &) = delete;
 
-    static FlagRegistry &GlobalRegistry();
+    static FlagRegistry &global_registry();
 
-    void Register(CommandFlag *flag);
-    CommandFlag *Find(const std::string &name) const;
+    void flags_register(CommandFlag *flag);
+    CommandFlag *find(const std::string &name) const;
 
-    bool SetFlag(const std::string &name, const std::string &value);
-    CommandFlag *SetFlag(const std::string &name, const std::string &value,
+    bool set_flag(const std::string &name, const std::string &value);
+    CommandFlag *set_flag(const std::string &name, const std::string &value,
                          std::string &msg);
 
-    std::vector<const CommandFlag *> GetAllFlags() const;
+    std::vector<const CommandFlag *> get_all_flags() const;
 };
 
 // ============================================================
@@ -158,27 +158,27 @@ class FlagRegisterer {
         FlagValue *current = new FlagValue(current_storage, false);
         FlagValue *defvalue = new FlagValue(defvalue_storage, false);
         CommandFlag *flag = new CommandFlag(name, help, file, current, defvalue);
-        FlagRegistry::GlobalRegistry().Register(flag);
+        FlagRegistry::global_registry().flags_register(flag);
     }
 };
 
 // ============================================================
 // Free functions
 // ============================================================
-bool SetFlag(const std::string &name, const std::string &value);
-bool SetFlag(const std::string &name, const std::string &value,
+bool set_flag(const std::string &name, const std::string &value);
+bool set_flag(const std::string &name, const std::string &value,
              std::string &msg);
 
 // ============================================================
 // FlagValue template specializations
 // ============================================================
-template <> inline FlagType FlagValue::FlagTypeFor<bool>() { return FlagType::Bool; }
-template <> inline FlagType FlagValue::FlagTypeFor<int32_t>() { return FlagType::Int32; }
-template <> inline FlagType FlagValue::FlagTypeFor<uint32_t>() { return FlagType::UInt32; }
-template <> inline FlagType FlagValue::FlagTypeFor<int64_t>() { return FlagType::Int64; }
-template <> inline FlagType FlagValue::FlagTypeFor<uint64_t>() { return FlagType::UInt64; }
-template <> inline FlagType FlagValue::FlagTypeFor<double>() { return FlagType::Double; }
-template <> inline FlagType FlagValue::FlagTypeFor<std::string>() { return FlagType::String; }
+template <> inline FlagType FlagValue::flag_type_for<bool>() { return FlagType::Bool; }
+template <> inline FlagType FlagValue::flag_type_for<int32_t>() { return FlagType::Int32; }
+template <> inline FlagType FlagValue::flag_type_for<uint32_t>() { return FlagType::UInt32; }
+template <> inline FlagType FlagValue::flag_type_for<int64_t>() { return FlagType::Int64; }
+template <> inline FlagType FlagValue::flag_type_for<uint64_t>() { return FlagType::UInt64; }
+template <> inline FlagType FlagValue::flag_type_for<double>() { return FlagType::Double; }
+template <> inline FlagType FlagValue::flag_type_for<std::string>() { return FlagType::String; }
 
 // ============================================================
 // FlagValue implementation
@@ -197,7 +197,7 @@ inline FlagValue::~FlagValue() {
     }
 }
 
-inline bool FlagValue::ParseFrom(const std::string &value) {
+inline bool FlagValue::parse_from(const std::string &value) {
     switch (type_) {
         case FlagType::Bool: {
             const char *kTrue[]  = {"1", "t", "true", "y", "yes"};
@@ -274,7 +274,7 @@ inline bool FlagValue::ParseFrom(const std::string &value) {
     }
 }
 
-inline std::string FlagValue::ToString() const {
+inline std::string FlagValue::flags_to_string() const {
     char buf[64];
     switch (type_) {
         case FlagType::Bool:
@@ -300,7 +300,7 @@ inline std::string FlagValue::ToString() const {
     return {};
 }
 
-inline bool FlagValue::Equal(const FlagValue &other) const {
+inline bool FlagValue::equal(const FlagValue &other) const {
     if (type_ != other.type_) return false;
     switch (type_) {
         case FlagType::Bool:    return *reinterpret_cast<const bool*>(storage_) == *reinterpret_cast<const bool*>(other.storage_);
@@ -323,22 +323,22 @@ inline CommandFlag::CommandFlag(const char *name, const char *help, const char *
       current_(current), defvalue_(defvalue) {}
 
 inline std::string CommandFlag::current_value() const {
-    return current_->ToString();
+    return current_->flags_to_string();
 }
 
 inline std::string CommandFlag::default_value() const {
-    return defvalue_->ToString();
+    return defvalue_->flags_to_string();
 }
 
 inline FlagType CommandFlag::type() const {
     return defvalue_->type();
 }
 
-inline bool CommandFlag::SetValue(const std::string &value) {
-    return current_->ParseFrom(value);
+inline bool CommandFlag::set_value(const std::string &value) {
+    return current_->parse_from(value);
 }
 
-inline std::string CommandFlag::TypeName() const {
+inline std::string CommandFlag::flags_type_name() const {
     switch (type()) {
         case FlagType::Bool:   return "bool";
         case FlagType::Int32:  return "int32";
@@ -354,7 +354,7 @@ inline std::string CommandFlag::TypeName() const {
 // ============================================================
 // FlagRegistry implementation
 // ============================================================
-inline FlagRegistry &FlagRegistry::GlobalRegistry() {
+inline FlagRegistry &FlagRegistry::global_registry() {
     static FlagRegistry instance;
     return instance;
 }
@@ -364,7 +364,7 @@ inline FlagRegistry::~FlagRegistry() {
         delete pair.second;
 }
 
-inline void FlagRegistry::Register(CommandFlag *flag) {
+inline void FlagRegistry::flags_register(CommandFlag *flag) {
     if (flag == nullptr) return;
     auto result = flags_.emplace(flag->name(), flag);
     if (!result.second) {
@@ -373,7 +373,7 @@ inline void FlagRegistry::Register(CommandFlag *flag) {
     }
 }
 
-inline CommandFlag *FlagRegistry::Find(const std::string &name) const {
+inline CommandFlag *FlagRegistry::find(const std::string &name) const {
     auto it = flags_.find(name);
     if (it != flags_.end()) return it->second;
     // Also try with dashes replaced by underscores
@@ -387,22 +387,22 @@ inline CommandFlag *FlagRegistry::Find(const std::string &name) const {
     return nullptr;
 }
 
-inline bool FlagRegistry::SetFlag(const std::string &name,
+inline bool FlagRegistry::set_flag(const std::string &name,
                                    const std::string &value) {
-    CommandFlag *flag = Find(name);
+    CommandFlag *flag = find(name);
     if (flag == nullptr) return false;
-    return flag->SetValue(value);
+    return flag->set_value(value);
 }
 
-inline CommandFlag *FlagRegistry::SetFlag(const std::string &name,
+inline CommandFlag *FlagRegistry::set_flag(const std::string &name,
                                            const std::string &value,
                                            std::string &msg) {
-    CommandFlag *flag = Find(name);
+    CommandFlag *flag = find(name);
     if (flag == nullptr) {
         msg.clear();
         return nullptr;
     }
-    if (flag->SetValue(value)) {
+    if (flag->set_value(value)) {
         msg = flag->name() + " set to " + value;
     } else {
         msg.clear();
@@ -410,7 +410,7 @@ inline CommandFlag *FlagRegistry::SetFlag(const std::string &name,
     return flag;
 }
 
-inline std::vector<const CommandFlag *> FlagRegistry::GetAllFlags() const {
+inline std::vector<const CommandFlag *> FlagRegistry::get_all_flags() const {
     std::vector<const CommandFlag *> result;
     result.reserve(flags_.size());
     for (const auto &pair : flags_)
@@ -421,13 +421,13 @@ inline std::vector<const CommandFlag *> FlagRegistry::GetAllFlags() const {
 // ============================================================
 // Free function implementations
 // ============================================================
-inline bool SetFlag(const std::string &name, const std::string &value) {
-    return FlagRegistry::GlobalRegistry().SetFlag(name, value);
+inline bool set_flag(const std::string &name, const std::string &value) {
+    return FlagRegistry::global_registry().set_flag(name, value);
 }
 
-inline bool SetFlag(const std::string &name, const std::string &value,
+inline bool set_flag(const std::string &name, const std::string &value,
                      std::string &msg) {
-    return FlagRegistry::GlobalRegistry().SetFlag(name, value, msg) != nullptr;
+    return FlagRegistry::global_registry().set_flag(name, value, msg) != nullptr;
 }
 
 }  // namespace detail
