@@ -1,6 +1,6 @@
 set(CLI_EXAMPLES
     minimal simple subcommands option_groups enum validators
-    custom_validator formatter config_app ranges
+    custom_validator formatter config_app ranges xflags
 )
 
 foreach(E ${CLI_EXAMPLES})
