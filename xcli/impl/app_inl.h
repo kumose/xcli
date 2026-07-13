@@ -591,7 +591,10 @@ XCLI_INLINE void App::clear() {
     }
 }
 
-XCLI_INLINE void App::parse(int argc, const char *const *argv) { parse_char_t(argc, argv); }
+XCLI_INLINE void App::parse(int argc, const char *const *argv) {
+    save_parsed_args(argc, argv);
+    parse_char_t(argc, argv);
+}
 XCLI_INLINE void App::parse(int argc, const wchar_t *const *argv) { parse_char_t(argc, argv); }
 
 namespace detail {
@@ -2583,14 +2586,12 @@ XCLI_INLINE std::string simple(const App *app, const Error &e) {
     std::string header = std::string(e.what()) + "\n";
     std::vector<std::string> names;
 
-    // Collect names
     if(app->get_help_ptr() != nullptr)
         names.push_back(app->get_help_ptr()->get_name());
 
     if(app->get_help_all_ptr() != nullptr)
         names.push_back(app->get_help_all_ptr()->get_name());
 
-    // If any names found, suggest those
     if(!names.empty())
         header += "Run with " + detail::join(names, " or ") + " for more information.\n";
 

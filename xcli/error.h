@@ -9,6 +9,7 @@
 // IWYU pragma: private, include "CLI/CLI.hpp"
 
 // [CLI11:public_includes:set]
+#include <iostream>
 #include <exception>
 #include <stdexcept>
 #include <string>
@@ -80,7 +81,11 @@ class Error : public std::runtime_error {
     XCLI_NODISCARD std::string get_name() const { return error_name; }
 
     Error(std::string name, std::string msg, int exit_code = static_cast<int>(ExitCodes::BaseClass))
-        : runtime_error(msg), actual_exit_code(exit_code), error_name(std::move(name)) {}
+        : runtime_error(msg), actual_exit_code(exit_code), error_name(std::move(name)) {
+        if(actual_exit_code > 0) {
+            std::cerr << "[ERROR] " << error_name << ": " << msg << '\n';
+        }
+    }
 
     Error(std::string name, std::string msg, ExitCodes exit_code)
         : Error(std::move(name), std::move(msg), static_cast<int>(exit_code)) {}

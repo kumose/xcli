@@ -24,6 +24,7 @@
 // [CLI11:public_includes:end]
 
 // CLI Library includes
+#include <xcli/argv.h>
 #include <xcli/config_fwd.h>
 #include <xcli/error.h>
 #include <xcli/formatter_fwd.h>
