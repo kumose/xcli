@@ -1,138 +1,44 @@
-# Copyright (C) Kumo inc. and its affiliates.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
+add_executable(ensure_utf8 cli/ensure_utf8.cpp)
+add_executable(ensure_utf8_twice cli/ensure_utf8_twice.cpp)
+target_link_libraries(ensure_utf8 PRIVATE ${PROJECT_NAME}::cli)
+target_link_libraries(ensure_utf8_twice PRIVATE ${PROJECT_NAME}::cli)
 
+set(CLI_TESTS
+    simple_test app_test helpers_test creation_test subcommand_test
+    option_type_test numeric_type_test set_test transform_test help_test
+    formatter_test new_parse_test config_file_test optional_test
+    string_parse_test complex_type_test true_false_test locale_test
+    option_group_test extra_validators_test encoding_test
+    flags_test
+)
 
-
-configure_file(${PROJECT_SOURCE_DIR}/tests/config.h.in ${PROJECT_SOURCE_DIR}/tests/config.h @ONLY)
-
-kmcmake_cc_test(
-        NAME raw_test
-        MODULE base
-        SOURCES raw_test.cc
+foreach(T ${CLI_TESTS})
+    kmcmake_cc_test(
+        NAME ${T}
+        MODULE cli
+        SOURCES
+            cli/${T}.cc
+            cli/main.cc
+        DEPS ${PROJECT_NAME}::cli
         CXXOPTS ${KMCMAKE_CXX_OPTIONS}
-)
+    )
+    if(${T} STREQUAL "app_test")
+        target_compile_definitions(cli_${T} PRIVATE
+            XCLI_ENSURE_UTF8_EXE="$<TARGET_FILE:ensure_utf8>"
+            XCLI_ENSURE_UTF8_TWICE_EXE="$<TARGET_FILE:ensure_utf8_twice>"
+        )
+        target_link_libraries(cli_${T} PRIVATE Threads::Threads)
+        add_dependencies(cli_${T} ensure_utf8 ensure_utf8_twice)
+    endif()
+endforeach()
 
 kmcmake_cc_test(
-        NAME pass_test
-        MODULE base
-        SOURCES pass_test.cc
-        CXXOPTS ${KMCMAKE_CXX_OPTIONS}
-        EXT
-)
-
-# base_pass_test_1
-kmcmake_cc_test_ext(
-        NAME pass_test
-        MODULE base
-        ALIAS 1
-        PASS_EXP "pass;Passed"
-)
-
-# base_pass_test_2
-kmcmake_cc_test_ext(
-        NAME pass_test
-        MODULE base
-        ALIAS 2
-        PASS_EXP "pass;Passed"
-)
-# base_pass_test_foo
-kmcmake_cc_test_ext(
-        NAME pass_test
-        MODULE base
-        ALIAS foo
-        PASS_EXP "pass;Passed"
-)
-
-# base_pass_test_bar not run
-kmcmake_cc_test_ext(
-        NAME pass_test
-        MODULE base
-        ALIAS bar
-        PASS_EXP "pass;Passed"
-        DISABLED
-)
-
-kmcmake_cc_test(
-        NAME args_test
-        MODULE base
-        SOURCES args_test.cc
-        EXT
-)
-
-#[[ base_args_test_fail fail
-kmcmake_cc_test_ext(
-        NAME args_test
-        MODULE base
-        ALIAS fail
-        FAIL_EXP "[^a-z]Error;ERROR;Failed"
-)
-
-# base_args_test_fail fail
-kmcmake_cc_test_ext(
-        NAME args_test
-        MODULE base
-        ALIAS fail_args
-        ARGS "Failed"
-        FAIL_EXP "[^a-z]Error;ERROR;Failed"
-)]]
-
-#[[ base_args_test_skip fail
-kmcmake_cc_test_ext(
-        NAME args_test
-        MODULE base
-        ALIAS skip_fail
-        PASS_EXP "pass;Passed"
-        FAIL_EXP "[^a-z]Error;ERROR;Failed"
-        SKIP_EXP "[^a-z]Skip" "SKIP" "Skipped"
-)]]
-kmcmake_cc_test_ext(
-        NAME args_test
-        MODULE base
-        ALIAS skip
-        ARGS "SKIP"
-        PASS_EXP "pass;Passed"
-        FAIL_EXP "[^a-z]Error;ERROR;Failed"
-        SKIP_EXP "[^a-z]Skip" "SKIP" "Skipped"
-)
-
-# base_args_test_skip fail
-kmcmake_cc_test_ext(
-        NAME args_test
-        MODULE base
-        ALIAS skip_pass
-        ARGS "Passed"
-        PASS_EXP "pass;Passed"
-        FAIL_EXP "[^a-z]Error;ERROR;Failed"
-        SKIP_EXP "[^a-z]Skip" "SKIP" "Skipped"
-)
-
-# base_args_test_skip fail
-kmcmake_cc_test_ext(
-        NAME args_test
-        MODULE base
-        ALIAS skip_diabled
-        ARGS "Passed"
-        PASS_EXP "pass;Passed"
-        FAIL_EXP "[^a-z]Error;ERROR;Failed"
-        SKIP_EXP "[^a-z]Skip" "SKIP" "Skipped"
-        DISABLED
-)
-
-kmcmake_cc_test(
-        NAME raw_test
-        MODULE norun
-        SOURCES raw_test.cc
-        CXXOPTS ${KMCMAKE_CXX_OPTIONS}
+    NAME flags_declare_test
+    MODULE cli
+    SOURCES
+        cli/flags_declare_test.cc
+        cli/flags_declare_flags.cc
+        cli/main.cc
+    DEPS ${PROJECT_NAME}::cli
+    CXXOPTS ${KMCMAKE_CXX_OPTIONS}
 )
