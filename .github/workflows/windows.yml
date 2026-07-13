@@ -19,14 +19,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install dependencies
-        shell: bash
-        run: |
-          git clone https://github.com/google/googletest.git -b v1.15.2 --depth 1
-          cmake -B gtest_build -S googletest
-          cmake --build gtest_build -j
-          cmake --install gtest_build --prefix /usr/local
-
       - name: Configure
         shell: bash
         run: |
